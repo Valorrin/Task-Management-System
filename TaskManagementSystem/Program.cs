@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options
+builder.Services.AddDbContext<TMSystemDBContext>(options => options
     .UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -20,7 +20,7 @@ builder.Services
         options.Password.RequireNonAlphanumeric = false;
 
     })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<TMSystemDBContext>();
 
 builder.Services.AddControllersWithViews();
 
