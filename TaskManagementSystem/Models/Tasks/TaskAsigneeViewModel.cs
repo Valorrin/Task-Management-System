@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using TaskManagementSystem.Data.Models;
+using TaskManagementSystem.Models.Employees;
 
-namespace TaskManagementSystem.Models.Employees
+namespace TaskManagementSystem.Models.Tasks
 {
-    public class AddEmployeeFormModel
+    public class TaskAsigneeViewModel
     {
-
         public int Id { get; set; }
         public string FirstName { get; set; }
 
@@ -18,6 +18,5 @@ namespace TaskManagementSystem.Models.Employees
 
         public decimal Salary { get; set; }
 
-        public IEnumerable<Task> Tasks { get; set; } = new List<Task>();
     }
 }

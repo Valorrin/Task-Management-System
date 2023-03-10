@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskManagementSystem.Data;
 using TaskManagementSystem.Models.Employees;
 
 namespace TaskManagementSystem.Controllers
 {
     public class EmployeesController : Controller
     {
+
         public IActionResult Add() => View();
 
         [HttpPost]
