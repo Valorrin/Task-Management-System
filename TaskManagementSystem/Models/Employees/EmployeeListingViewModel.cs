@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-
-namespace TaskManagementSystem.Models.Employees
+﻿namespace TaskManagementSystem.Models.Employees
 {
-    public class AddEmployeeFormModel
+    public class EmployeeListingViewModel
     {
-
         public int Id { get; set; }
         public string FirstName { get; set; }
 
@@ -19,6 +15,6 @@ namespace TaskManagementSystem.Models.Employees
 
         public decimal Salary { get; set; }
 
-        public IEnumerable<Data.Models.Task> Tasks { get; set; } = new List<Data.Models.Task>();
+        public IEnumerable<Data.Models.Task> Tasks { get; set; }
     }
 }

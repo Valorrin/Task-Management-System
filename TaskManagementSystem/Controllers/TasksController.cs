@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.Data;
+using TaskManagementSystem.Data.Models;
 using TaskManagementSystem.Models.Employees;
 using TaskManagementSystem.Models.Tasks;
 
@@ -21,7 +22,14 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         public IActionResult Create(CreateTaskFormModel task)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                task.Assignees = this.GetEmployees();
+
+                return View(task);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         private IEnumerable<TaskAsigneeViewModel> GetEmployees()
