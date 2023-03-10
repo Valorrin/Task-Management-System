@@ -8,8 +8,12 @@ namespace TaskManagementSystem.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(FullNameMaxLength)]
-        public string FullName { get; set; }
+        [MaxLength(NameMaxLength)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(NameMaxLength)]
+        public string LastName { get; set; }
 
         [Required]
         [MaxLength(EmailMaxLength)]

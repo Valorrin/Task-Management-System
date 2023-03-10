@@ -2,7 +2,7 @@
 {
     public class DataConstants
     {
-        public const int FullNameMaxLength = 120;
+        public const int NameMaxLength = 100;
         public const int EmailMaxLength = 200;
         public const int PhoneNumberMaxLength = 15;
 
