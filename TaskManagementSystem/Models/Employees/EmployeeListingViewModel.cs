@@ -1,4 +1,7 @@
-﻿namespace TaskManagementSystem.Models.Employees
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+
+namespace TaskManagementSystem.Models.Employees
 {
     public class EmployeeListingViewModel
     {
@@ -11,10 +14,11 @@
 
         public string PhoneNumber { get; set; }
 
+        [BindProperty, DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         public decimal Salary { get; set; }
 
-        public IEnumerable<Data.Models.Task> Tasks { get; set; }
+       // public IEnumerable<Data.Models.Task> Tasks { get; set; }
     }
 }

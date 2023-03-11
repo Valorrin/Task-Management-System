@@ -18,7 +18,7 @@ namespace TaskManagementSystem.Data.Models
         public DateTime DueDate { get; set; }
 
         public int AssigneeId { get; set; }
-        public Employee Assignee { get; set; }
+        public Employee? Assignee { get; set; }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EmployeeListingViewModel>
+﻿@model IEnumerable<TaskListingViewModel>
 
 
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -12,26 +12,25 @@
                         <table class="table user-list">
                             <thead>
                                 <tr>
-                                    <th><span>Full Name</span></th>
-                                    <th><span>Email</span></th>
-                                    <th><span>Phone Number</span></th>
-                                    <th><span>Birth Date</span></th>
-                                    <th><span>Salary</span></th>
-                                    <th><span>Completed Tasks</span></th>
+                                    <th><span>Title</span></th>
+                                    <th><span>Description</span></th>
+                                    <th><span>Due date</span></th>
+                                    <th><span>Assignee</span></th>
+                                    <th><span>Complete task</span></th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach(var employee in Model)
+                                @foreach (var employee in Model)
                                 {
                                     <tr>
                                         <td>
-                                            <a>@employee.FirstName @employee.LastName</a>
+                                            <a>@employee.Title</a>
                                         </td>
-                                        <td>@employee.Email</td>
-                                        <td>@employee.PhoneNumber</td>
-                                        <td>@employee.BirthDate.Date</td>
-                                        <td>@employee.Salary</td>
+                                        <td>@employee.Description</td>
+                                        <td>@employee.DueDate</td>
+                                        <td>@employee.Assignee</td>
+                                        <td><asp:Button runat="server" id="btnLogin" Text="Log In" OnClick="btnLogin_Click" /></td>
                                         <td style="width: 20%;">
                                             <a href="#" class="table-link text-info">
                                                 <span class="fa-stack">

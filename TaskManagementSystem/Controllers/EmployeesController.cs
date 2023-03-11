@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.Data;
+using TaskManagementSystem.Data.Models;
 using TaskManagementSystem.Models.Employees;
 
 namespace TaskManagementSystem.Controllers
@@ -22,6 +23,22 @@ namespace TaskManagementSystem.Controllers
                 return View(employee);
             }
 
+
+            var employeeData = new Employee
+            {
+                FirstName = employee.FirstName,
+                LastName= employee.LastName,
+                BirthDate = employee.BirthDate,
+                Email = employee.Email,
+                PhoneNumber = employee.PhoneNumber,
+                Salary = employee.Salary,
+                Tasks = employee.Tasks,
+            };
+
+            this.data.Employees.Add(employeeData);
+
+            this.data.SaveChanges();
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -38,7 +55,7 @@ namespace TaskManagementSystem.Controllers
                     PhoneNumber= e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
-                    Tasks = e.Tasks,
+                    //Tasks = e.Tasks,
         });
 
             return View(employees);

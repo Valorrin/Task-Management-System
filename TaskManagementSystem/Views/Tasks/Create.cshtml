@@ -18,9 +18,10 @@
                     <input asp-for="Description" class="form-control">
                 </div>
 
+
                 <div class="form-group">
                     <label asp-for="DueDate">Due date</label>
-                    <input asp-for="DueDate" class="form-control">
+                    <input asp-for="DueDate" class="form-control" placeholder="@DateTime.UtcNow.Year">
                 </div>
 
                 <div class="form-group">

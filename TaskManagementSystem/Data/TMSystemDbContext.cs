@@ -22,7 +22,7 @@ namespace TaskManagementSystem.Data
             builder
                 .Entity<Employee>()
                 .Property(o => o.Salary)
-                .HasColumnType("decimal(18,4)");
+                .HasColumnType("decimal(18,2)");
 
             builder
                 .Entity<Models.Task>()

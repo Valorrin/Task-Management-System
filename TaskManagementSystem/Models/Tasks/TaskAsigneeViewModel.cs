@@ -1,4 +1,6 @@
-﻿using TaskManagementSystem.Data.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using TaskManagementSystem.Data.Models;
 using TaskManagementSystem.Models.Employees;
 
 namespace TaskManagementSystem.Models.Tasks
@@ -14,6 +16,7 @@ namespace TaskManagementSystem.Models.Tasks
 
         public string PhoneNumber { get; set; }
 
+        [BindProperty, DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         public decimal Salary { get; set; }

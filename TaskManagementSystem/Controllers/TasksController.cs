@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Data.Models;
 using TaskManagementSystem.Models.Employees;
@@ -14,10 +15,10 @@ namespace TaskManagementSystem.Controllers
             => this.data = data;
 
 
-        public IActionResult Create() => View( new CreateTaskFormModel
-            {
-                 Assignees = this.GetEmployees()
-            });
+        public IActionResult Create() => View(new CreateTaskFormModel
+        {
+            Assignees = this.GetEmployees()
+        });
 
         [HttpPost]
         public IActionResult Create(CreateTaskFormModel task)
@@ -29,7 +30,24 @@ namespace TaskManagementSystem.Controllers
                 return View(task);
             }
 
+            var taskData = new Data.Models.Task
+            {
+                Title = task.Title,
+                Description = task.Description,
+                DueDate = task.DueDate,
+                AssigneeId = task.AssigneeId,
+                Assignee = (Employee)this.data
+                .Employees
+                .Where(x => x.Id == task.AssigneeId).First()
+            };
+
+         
+            this.data.Tasks.Add(taskData);
+
+            this.data.SaveChanges();
+
             return RedirectToAction("Index", "Home");
+
         }
 
         private IEnumerable<TaskAsigneeViewModel> GetEmployees()
@@ -46,5 +64,24 @@ namespace TaskManagementSystem.Controllers
                 BirthDate= e.BirthDate,
             })
             .ToList();
+
+        public IActionResult All()
+        {
+            var tasks = this.data
+                .Tasks
+                .Select(e => new TaskListingViewModel
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    Description = e.Description,
+                    DueDate = e.DueDate,
+                    Assignee = $"{e.Assignee.FirstName} {e.Assignee.LastName}"    
+
+                }) ;
+
+            return View(tasks);
+        }
     }
+
+
 }

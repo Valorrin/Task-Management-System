@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using static TaskManagementSystem.Data.DataConstants;
 
 namespace TaskManagementSystem.Data.Models
@@ -26,6 +27,7 @@ namespace TaskManagementSystem.Data.Models
         public DateTime BirthDate { get; set; }
 
         public decimal Salary { get; set; }
+
 
         public IEnumerable<Task> Tasks { get; set; } = new List<Task>();
     }
