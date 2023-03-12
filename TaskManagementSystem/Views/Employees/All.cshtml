@@ -33,7 +33,7 @@
                                         <td>@employee.PhoneNumber</td>
                                         <td>@employee.BirthDate.ToString("MM/dd/yyyy")  </td>
                                         <td>@employee.Salary</td>
-                                        <td>@employee.CompletedTasks</td>
+                                        <td>@employee.CompletedTasksCount</td>
                                         <td style="width: 20%;">
                                             <a class="btn btn-primary btn-sm" asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
                                             <a class="btn btn-danger btn-sm" asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.Id">Delete</a>

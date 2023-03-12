@@ -54,7 +54,7 @@ namespace TaskManagementSystem.Controllers
                     PhoneNumber= e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
-                    CompletedTasksCount = e.CompletedTasks.Count(),
+                    CompletedTasksCount = e.CompletedTasksCount
         });
 
             return View(employees);

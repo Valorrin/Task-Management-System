@@ -32,5 +32,7 @@ namespace TaskManagementSystem.Data.Models
 
 
         public IEnumerable<Task> Tasks { get; set; } = new List<Task>();
+
+        public int CompletedTasksCount { get; set; } = 0;
     }
 }

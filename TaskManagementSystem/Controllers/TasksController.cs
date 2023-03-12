@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Collections.Generic;
 using TaskManagementSystem.Data;
 using TaskManagementSystem.Data.Models;
 using TaskManagementSystem.Models.Employees;
@@ -141,36 +142,15 @@ namespace TaskManagementSystem.Controllers
                .Where(e => e.Id == id)
                .FirstOrDefault();
 
-            var list = this.data
-                    .Employees
-                    .Where(e => e.Id == taskData.AssigneeId)
-                    .Select(e => e.CompletedTasks)
-                    .ToList();
-
             if (taskData != null)
             {
-                var newEmployeeData = this.data
+                var employeeData = this.data
                     .Employees
                     .Where(e=> e.Id == taskData.AssigneeId)
-                    .Select(x => new AddEmployeeFormModel
-                    {
-                        
-                        FirstName= x.FirstName,
-                        BirthDate = x.BirthDate,
-                        Email= x.Email,
-                        Id = x.Id,
-                        LastName = x.LastName,
-                        PhoneNumber = x.PhoneNumber,
-                        Salary = x.Salary,
-                        CompletedTasks = x.CompletedTasks
+                    .FirstOrDefault();
 
-                    });
 
-                
-                var oldEmployee = this.data
-                    .Employees
-                    .Where(e => e.Id == id).FirstOrDefault();
-
+                employeeData.CompletedTasksCount++;
 
                 this.data.Tasks.Remove(taskData);
 

@@ -23,5 +23,6 @@ namespace TaskManagementSystem.Models.Employees
 
         public IEnumerable<Data.Models.Task>? CompletedTasks { get; set; }
 
+        public int CompletedTasksCount { get; set; }
     }
 }
