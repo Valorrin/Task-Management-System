@@ -41,23 +41,56 @@ namespace TaskManagementSystem.Controllers
             return RedirectToAction("All", "Employees");
         }
 
-        public IActionResult All()
+        public IActionResult All([FromQuery] AllEmployeesQueryModel query)
         {
-            var employees = this.data
-                .Employees
+            var EmployeeQuery = this.data.Employees.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
+            {
+                EmployeeQuery = EmployeeQuery.Where(f =>
+                    f.FirstName.ToLower().Contains(query.SearchTerm.ToLower()));
+            }
+
+            EmployeeQuery = query.Sorting switch
+            {
+                EmployeeSorting.FirstName => EmployeeQuery.OrderBy(f => f.FirstName),
+                EmployeeSorting.CompletedTasks => EmployeeQuery.OrderByDescending(f => f.CompletedTasksCount),
+                EmployeeSorting.BirthDate => EmployeeQuery.OrderBy(f=>f.BirthDate),
+                EmployeeSorting.Salary => EmployeeQuery.OrderByDescending(f => f.Salary)
+            };
+
+            var totalEmployees = EmployeeQuery.Count();
+
+            var employees = EmployeeQuery
+                .Skip((query.CurrentPage - 1) * AllEmployeesQueryModel.EmployeesPerPage)
+                .Take(AllEmployeesQueryModel.EmployeesPerPage)
                 .Select(e => new EmployeeListingViewModel
                 {
-                    Id= e.Id,
+                    Id = e.Id,
                     FirstName = e.FirstName,
                     LastName = e.LastName,
-                    Email= e.Email,
-                    PhoneNumber= e.PhoneNumber,
+                    Email = e.Email,
+                    PhoneNumber = e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
                     CompletedTasksCount = e.CompletedTasksCount
-        });
+                })
+                .ToList();
 
-            return View(employees);
+            var employeeNames = this.data
+                .Employees
+                .Select(f => f.FirstName)
+                .Distinct()
+                .OrderBy(fn => fn)
+                .ToList();
+
+            query.TotalEmployees = totalEmployees;
+            query.Names = employeeNames;
+            query.Employees = employees;
+
+            return View(query);
+
+
         }
 
         [HttpGet]
