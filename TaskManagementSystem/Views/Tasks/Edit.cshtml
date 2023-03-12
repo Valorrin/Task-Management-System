@@ -1,12 +1,12 @@
 ﻿@model CreateTaskFormModel
 @{
-    ViewData["Title"] = "Create task";
+    ViewData["Title"] = "Edit task";
 }
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-            <h2 class="heading-margin">Create Task</h2>
+            <h2 class="heading-margin">Edit Task</h2>
 
             <form method="post">
                 <div class="form-group">
@@ -29,13 +29,13 @@
                     <select asp-for="AssigneeId" class="form-control">
                         @foreach (var assignee in Model.Assignees)
                         {
-                            <option value="@assignee.Id">@assignee.FirstName @assignee.LastName</option>
+                            <option value="@assignee.Id">@assignee.FirstName</option>
                         }
                     </select>
                     <span asp-validation-for="AssigneeId" class="small text-danger"></span>
                 </div>
 
-                <input class="btn btn-primary" type="submit" value="Create" />
+                <input class="btn btn-primary" type="submit" value="Save Changes" />
             </form>
         </div>
     </div>

@@ -32,14 +32,13 @@ namespace TaskManagementSystem.Controllers
                 Email = employee.Email,
                 PhoneNumber = employee.PhoneNumber,
                 Salary = employee.Salary,
-                Tasks = employee.Tasks,
             };
 
             this.data.Employees.Add(employeeData);
 
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("All", "Employees");
         }
 
         public IActionResult All()
@@ -55,10 +54,74 @@ namespace TaskManagementSystem.Controllers
                     PhoneNumber= e.PhoneNumber,
                     BirthDate = e.BirthDate,
                     Salary = e.Salary,
-                    //Tasks = e.Tasks,
+                    CompletedTasksCount = e.CompletedTasks.Count(),
         });
 
             return View(employees);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var employee = this.data
+                .Employees
+                .Where(e => e.Id == id).First();
+
+            var employeeModel = new AddEmployeeFormModel
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                BirthDate = employee.BirthDate,
+                Email = employee.Email,
+                PhoneNumber = employee.PhoneNumber,
+                Salary = employee.Salary,               
+            };
+
+            return View(employeeModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddEmployeeFormModel employee)
+        {
+            var employeeData = this.data
+                .Employees
+                .Where(e => e.Id == employee.Id)
+                .FirstOrDefault();
+
+            if (employeeData != null)
+            {
+                employeeData.FirstName = employee.FirstName;
+                employeeData.LastName = employee.LastName;
+                employeeData.BirthDate = employee.BirthDate;
+                employeeData.Email = employee.Email;
+                employeeData.Salary = employee.Salary;
+                employeeData.PhoneNumber = employee.PhoneNumber;
+
+                this.data.SaveChanges();
+
+                return RedirectToAction("All", "Employees");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var employeeData = this.data
+                .Employees
+                .Where(e => e.Id == id)
+                .FirstOrDefault();
+
+            if (employeeData != null)
+            {
+                this.data.Employees.Remove(employeeData);
+                this.data.SaveChanges();
+
+            }
+
+            return RedirectToAction("All");
         }
     }
 }

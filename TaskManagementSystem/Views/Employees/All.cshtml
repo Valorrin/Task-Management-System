@@ -28,23 +28,15 @@
                                         <td>
                                             <a>@employee.FirstName @employee.LastName</a>
                                         </td>
+                                        <input type="hidden" asp-for="@employee.Id" />
                                         <td>@employee.Email</td>
                                         <td>@employee.PhoneNumber</td>
-                                        <td>@employee.BirthDate.Date</td>
+                                        <td>@employee.BirthDate.ToString("MM/dd/yyyy")  </td>
                                         <td>@employee.Salary</td>
+                                        <td>@employee.CompletedTasks</td>
                                         <td style="width: 20%;">
-                                            <a href="#" class="table-link text-info">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="#" class="table-link danger">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
+                                            <a class="btn btn-primary btn-sm" asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
+                                            <a class="btn btn-danger btn-sm" asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.Id">Delete</a>
                                         </td>
                                     </tr>
                                 }

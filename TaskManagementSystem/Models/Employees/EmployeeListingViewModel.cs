@@ -19,6 +19,10 @@ namespace TaskManagementSystem.Models.Employees
 
         public decimal Salary { get; set; }
 
-       // public IEnumerable<Data.Models.Task> Tasks { get; set; }
+        public IEnumerable<Data.Models.Task>? CompletedTasks { get; set; }
+
+        public int? CompletedTasksCount { get; set; }
+
+        // public IEnumerable<Data.Models.Task> Tasks { get; set; }
     }
 }

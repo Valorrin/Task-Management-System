@@ -21,6 +21,7 @@ namespace TaskManagementSystem.Models.Employees
 
         public decimal Salary { get; set; }
 
-        public IEnumerable<Data.Models.Task> Tasks { get; set; } = new List<Data.Models.Task>();
+        public IEnumerable<Data.Models.Task>? CompletedTasks { get; set; }
+
     }
 }

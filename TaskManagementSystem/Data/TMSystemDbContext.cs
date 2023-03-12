@@ -29,7 +29,8 @@ namespace TaskManagementSystem.Data
                 .HasOne(a => a.Assignee)
                 .WithMany(t => t.Tasks)
                 .HasForeignKey(a => a.AssigneeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
+
 
             base.OnModelCreating(builder);
         }

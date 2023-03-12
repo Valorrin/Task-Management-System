@@ -28,6 +28,8 @@ namespace TaskManagementSystem.Data.Models
 
         public decimal Salary { get; set; }
 
+        public IEnumerable<Task> CompletedTasks { get; set; } = new List<Task>();
+
 
         public IEnumerable<Task> Tasks { get; set; } = new List<Task>();
     }

@@ -15,7 +15,7 @@ namespace TaskManagementSystem.Models.Tasks
         [BindProperty, DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
 
-        public int AssigneeId { get; set; }
+        public int? AssigneeId { get; set; }
        
         public IEnumerable<TaskAsigneeViewModel>? Assignees { get; set; }
     }

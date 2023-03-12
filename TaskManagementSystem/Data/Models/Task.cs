@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static TaskManagementSystem.Data.DataConstants;
 
 namespace TaskManagementSystem.Data.Models
@@ -17,7 +18,7 @@ namespace TaskManagementSystem.Data.Models
 
         public DateTime DueDate { get; set; }
 
-        public int AssigneeId { get; set; }
+        public int? AssigneeId { get; set; }
         public Employee? Assignee { get; set; }
 
     }

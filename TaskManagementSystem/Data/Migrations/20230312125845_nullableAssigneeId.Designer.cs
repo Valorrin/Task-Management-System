@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManagementSystem.Data;
 
@@ -11,9 +12,10 @@ using TaskManagementSystem.Data;
 namespace TaskManagementSystem.Data.Migrations
 {
     [DbContext(typeof(TMSystemDBContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230312125845_nullableAssigneeId")]
+    partial class nullableAssigneeId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,9 +284,6 @@ namespace TaskManagementSystem.Data.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -293,8 +292,6 @@ namespace TaskManagementSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AssigneeId");
-
-                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Tasks");
                 });
@@ -355,19 +352,13 @@ namespace TaskManagementSystem.Data.Migrations
                     b.HasOne("TaskManagementSystem.Data.Models.Employee", "Assignee")
                         .WithMany("Tasks")
                         .HasForeignKey("AssigneeId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("TaskManagementSystem.Data.Models.Employee", null)
-                        .WithMany("CompletedTasks")
-                        .HasForeignKey("EmployeeId");
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Assignee");
                 });
 
             modelBuilder.Entity("TaskManagementSystem.Data.Models.Employee", b =>
                 {
-                    b.Navigation("CompletedTasks");
-
                     b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
